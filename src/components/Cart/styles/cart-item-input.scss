@@ -1,0 +1,11 @@
+.cart-item-input {
+  &__qty {
+    width: 50px;
+  }
+
+  &__tooltip {
+    font-size: 12px;
+    line-height: 1;
+    color: red
+  }
+}

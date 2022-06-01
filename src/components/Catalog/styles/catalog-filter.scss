@@ -1,0 +1,23 @@
+.catalog-filter {
+  display: flex;
+  gap: 10px;
+
+  &__btn {
+    border: none;
+    background-color: rgba(green, 0.75);
+    color: white;
+    margin: 0 3px;
+    padding: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      background-color: green;
+    }
+
+    &--is-active {
+      background-color: green;
+      pointer-events: none;
+    }
+  }
+}

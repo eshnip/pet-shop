@@ -1,0 +1,66 @@
+.catalog-list-item {
+  $self: &;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(green, 0.15);
+  }
+
+  &--is-disabled {
+    background-color: rgba(#ccc, 0.15);
+    pointer-events: none;
+
+    &:hover {
+      background-color: rgba(#ccc, 0.3);
+    }
+  }
+
+  &__title {
+    text-align: left;
+    padding: 10px;
+  }
+
+  &__price {
+    border-left: 1px solid #ccc;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+
+    &--up {
+      animation: priceUp 2s forwards;
+    }
+
+    &--down {
+      animation: priceDown 2s forwards;
+    }
+
+
+    @keyframes priceUp {
+      0% {
+        background-color: rgba(red, 0.15);
+      }
+      100% {
+        background-color: transparent;
+      }
+
+    }
+
+    @keyframes priceDown {
+      0% {
+        background-color: rgba(green, 0.15);
+      }
+      100% {
+        background-color: transparent;
+      }
+
+    }
+  }
+}

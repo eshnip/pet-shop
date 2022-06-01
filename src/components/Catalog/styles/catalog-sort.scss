@@ -1,0 +1,23 @@
+.catalog-sort {
+  display: flex;
+  gap: 10px;
+
+  &__btn {
+    border: none;
+    background-color: rgba(#229999, 0.75);
+    color: white;
+    margin: 0 3px;
+    padding: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #229999;
+    }
+
+    &--is-active {
+      background-color: #229999;
+      pointer-events: none;
+    }
+  }
+}
