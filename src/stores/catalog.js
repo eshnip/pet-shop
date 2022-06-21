@@ -13,7 +13,19 @@ export const useCatalogStore = defineStore({
         ...group,
         products: group.products.filter(({qty}) => qty > 0)
       }))
-    }
+    },
+    catalogSortedPriceToDown(state) {
+      return state.catalog.map(group => ({
+        ...group,
+        products: [...group.products].sort((a,b) => b.price - a.price)
+      }))
+    },
+    catalogSortedPriceToUp(state) {
+        return state.catalog.map(group => ({
+          ...group,
+          products: [...group.products].sort((a,b) => a.price - b.price)
+      }))
+    },
   },
   actions: {
     async fetchProductsData() {

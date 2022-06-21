@@ -53,7 +53,7 @@ export default {
   setup() {
     const catalog = useCatalogStore();
 
-    const {catalog: allProducts, rate, availableProducts} = storeToRefs(catalog)
+    const {catalog: allProducts, rate, availableProducts, catalogSortedPriceToDown, catalogSortedPriceToUp} = storeToRefs(catalog)
     const {saveProductsToState, fetchProductsData} = catalog
     const {showAlert, alertIsActive} = useAlert()
     const productsList = ref([])
@@ -80,17 +80,11 @@ export default {
 
     const productsLength = computed(() => allProducts.value?.length)
 
-    const sortedProductsList = computed(() =>
-      productsList.value.map(group => ({
-        ...group,
-        products: sort.value ? [...group.products].sort((a, b) => sort.value === priceToUp ? (a.price - b.price) : (b.price - a.price)) : group.products
-      })))
-
     const setProductsByFilterValue = (payload) => productsList.value = filters[payload].value
 
     const setProductsBySortValue = payload => {
       sort.value = payload
-      productsList.value = sortedProductsList.value
+      productsList.value = sort.value === priceToUp ? catalogSortedPriceToUp.value : catalogSortedPriceToDown.value
     }
 
     return {

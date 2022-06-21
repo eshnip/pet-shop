@@ -36,13 +36,17 @@ export default {
     const alert = ref(false)
 
     const updateValue = (e) => {
-      if (e.target.value < 1) removeItem(props.id)
+      if (e.target.value.length) {
+        if (e.target.value < 1) removeItem(props.id)
 
-      if (e.target.value > props.available) {
-        showAlert()
-        e.target.value = props.available
+        if (e.target.value > props.available) {
+          showAlert()
+          e.target.value = props.available
+        } else {
+          hideAlert()
+        }
       } else {
-        hideAlert()
+        e.target.value = 1
       }
 
       updateCartItem(props.id, Number(e.target.value))
