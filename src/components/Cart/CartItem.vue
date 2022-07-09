@@ -14,7 +14,7 @@
       :available="item.qty"
       :id="item.id"
     />
-    <div class="cart-item__price">{{ price }} RUB / шт.</div>
+    <div class="cart-item__price" :class="priceClass">{{ price }} RUB / шт.</div>
     <div class="cart-item__total">{{ totalPriceValue }} RUB</div>
   </div>
 </template>
@@ -26,11 +26,13 @@ import {ref, computed, toRefs} from '@vue/composition-api'
 import {priceToFixed} from "@/helpers/priceToFixed";
 import {useCatalogStore} from "@/stores/catalog";
 import {storeToRefs} from 'pinia'
+import {watch} from "@vue/composition-api/dist/vue-composition-api";
 export default {
   name: 'CartItem',
   props: {
     item: {
       type: Object,
+      default: () => {}
     }
   },
   components: {CartItemInput},
@@ -41,12 +43,20 @@ export default {
     const qty = ref(1)
     const price = computed(() => priceToFixed(item.value.price * rate.value))
     const totalPriceValue = computed(() => priceToFixed(price.value * item.value.addedQty))
+    const priceClass = ref()
+
+    watch(() => rate.value, (newV, oldV) => {
+      priceClass.value = (newV > oldV ? 'cart-item__price--up' : 'cart-item__price--down')
+    })
+
+
     return {
       removeItem,
       qty,
       alert,
       price,
       totalPriceValue,
+      priceClass,
     }
   }
 }

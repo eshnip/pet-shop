@@ -1,3 +1,6 @@
+export const onlyAvailableProducts = 'available'
+
+
 export const catalogFilterBtns = () => {
     return [
         {
@@ -5,7 +8,7 @@ export const catalogFilterBtns = () => {
             label: 'Все товары',
         },
         {
-            name: 'available',
+            name: onlyAvailableProducts,
             label: 'Товары в наличие',
         }
     ]

@@ -15,6 +15,36 @@
     font-weight: 400;
     text-align: left;
     white-space: nowrap;
+
+    transition: background-color 0.3s;
+
+    &--up {
+      animation: priceUp 2s forwards;
+    }
+
+    &--down {
+      animation: priceDown 2s forwards;
+    }
+
+
+    @keyframes priceUp {
+      0% {
+        background-color: rgba(red, 0.15);
+      }
+      100% {
+        background-color: transparent;
+      }
+
+    }
+
+    @keyframes priceDown {
+      0% {
+        background-color: rgba(green, 0.15);
+      }
+      100% {
+        background-color: transparent;
+      }
+    }
   }
 
   &__total {

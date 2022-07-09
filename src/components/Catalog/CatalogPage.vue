@@ -28,7 +28,8 @@
 
     <div class="catalog__preloader" v-else></div>
 
-    <Alert :class="{'alert--is-active': alertIsActive}" label="Данные обновлены"/>
+    <Alert v-if="alertIsActive" :class="{'alert--is-active': alertIsActive}" label="Данные обновлены"/>
+
   </div>
 </template>
 
@@ -45,6 +46,8 @@ import {minRate, maxRate} from '@/constants/rate'
 import {getRandom} from '@/helpers/getRandom'
 import {delay} from '@/helpers/delay'
 import {priceToUp} from "@/constants/catalogSortBtns";
+import {onlyAvailableProducts} from "@/constants/catalogFilterBtns";
+
 
 export default {
   name: "CatalogPage",
@@ -59,11 +62,6 @@ export default {
     const productsList = ref([])
     const sort = ref()
 
-    const filters = {
-      'all': allProducts,
-      'available': availableProducts
-    }
-
     delay(1000).then(saveProductsToState).then(() => productsList.value = allProducts.value)
 
     let updateDataInterval = null;
@@ -73,17 +71,17 @@ export default {
         rate.value = getRandom(minRate, maxRate)
         fetchProductsData()
         showAlert()
-      }, 15000)
+      }, 5000)
     })
 
     onBeforeUnmount(() => clearInterval(updateDataInterval))
 
     const productsLength = computed(() => allProducts.value?.length)
 
-    const setProductsByFilterValue = (payload) => productsList.value = filters[payload].value
+    const setProductsByFilterValue = type => productsList.value = type === onlyAvailableProducts ? availableProducts.value : allProducts.value
 
-    const setProductsBySortValue = payload => {
-      sort.value = payload
+    const setProductsBySortValue = sortBy => {
+      sort.value = sortBy
       productsList.value = sort.value === priceToUp ? catalogSortedPriceToUp.value : catalogSortedPriceToDown.value
     }
 

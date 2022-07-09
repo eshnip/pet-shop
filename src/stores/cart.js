@@ -17,42 +17,40 @@ export const useCartStore = defineStore({
 
       return priceToFixed(state.cart.reduce((acc, cur) => acc + (cur.price * rate * cur.addedQty), 0))
     },
+
+    totalQty(state) {
+      return state.cart.reduce((acc, cur) => acc + cur.addedQty, 0)
+    }
   },
   actions: {
     addItemToCart(product) {
-      const cartItem = this.cart.find(el => el.id === Number(product.id))
+      const productInCart = this.cart.find(el => el.id === Number(product.id))
 
-      if (!cartItem) {
+      if (!productInCart) {
         this.cart.push(product)
         return
       }
 
-      if (cartItem.addedQty === product.qty) {
+      if (productInCart.addedQty === product.qty) {
         alert(`Вы превысили допустимое количество товара: ${product.title}`)
         return
       }
 
-      cartItem.addedQty += cartItem.addedQty < product.qty ? 1 : product.qty
+      productInCart.addedQty += productInCart.addedQty < product.qty ? 1 : product.qty
     },
 
-    updateCartItem(id, newQty) {
-      this.cart.find(el => el.id === id).addedQty = newQty
+    updateCartItemQty(payloadId, newQty) {
+      this.cart.find(({id}) => id === payloadId).addedQty = newQty
     },
 
     removeItem(id) {
       const idx = this.cart.findIndex(el => el.id === id)
       this.cart.find(el => el.id === id).addedQty = 1
-      this.cart.splice(idx, 1)
-    },
-
-    clearCart() {
-      this.cart = []
+      this.cart.splice(idx, 1);
     },
 
     checkout() {
-      const totalQty = this.cart.reduce((acc, cur) => acc + cur.addedQty, 0)
-      alert(`Покупка ${totalQty} товаров(а)`);
-      this.clearCart()
+      alert(`Покупка ${this.totalQty} товаров(а)`);
     },
   }
 });

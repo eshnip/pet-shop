@@ -25,6 +25,7 @@ export default {
   props: {
     group: {
       type: Object,
+      default: () => {}
     }
   },
   setup(props) {

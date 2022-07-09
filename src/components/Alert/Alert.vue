@@ -9,13 +9,14 @@ import { computed } from '@vue/composition-api'
 
 export default {
   name: 'AppAlert',
-
   props: {
     theme: {
       type: String,
+      default: 'primary'
     },
     label: {
       type: String,
+      default: ''
     },
   },
   setup(props) {

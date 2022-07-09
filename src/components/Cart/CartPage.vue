@@ -3,7 +3,7 @@
     <div class="cart__wrapper">
       <div class="cart__title">Корзина</div>
 
-      <form class="cart__form" @submit.prevent="checkout">
+      <form class="cart__form" @submit.prevent="checkoutCart">
         <div class="cart__body">
           <ul class="cart__list" v-if="cartLength">
             <CartItem
@@ -41,14 +41,22 @@ export default {
   name: 'CartPage',
   components: {CartItem},
   setup() {
-    const {cart, getCartItemsCount, getCartTotalValue, clearCart, checkout} = storeToRefs(useCartStore())
+    const cartStore = useCartStore()
+    const {cart, getCartItemsCount, getCartTotalValue} = storeToRefs(useCartStore())
 
     const cartLength = computed(() => cart.value?.length)
+
+    const clearCart = () => cartStore.$reset()
+
+    const checkoutCart = () => {
+      cartStore.checkout()
+      clearCart()
+    }
 
     return {
       cart,
       clearCart,
-      checkout,
+      checkoutCart,
       getCartItemsCount,
       getCartTotalValue,
       cartLength

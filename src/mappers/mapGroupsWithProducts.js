@@ -8,7 +8,6 @@ export const mapGroupsWithProducts = (goods) => {
     const filteredProducts = productsInGroup.map(([productId, productData]) => {
         const targetProduct = goods.find(({id}) => id === Number(productId))
 
-
         return {
           id: Number(productId),
           title: productData.N,

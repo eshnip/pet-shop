@@ -7,6 +7,7 @@
         :value="qty"
         @input="updateValue"
         @blur="hideAlert"
+        @click="modalIsOpen = true"
       > шт.
     </label>
     <span class="cart-item-input__tooltip" v-if="alert">Количество ограничено</span>
@@ -22,22 +23,28 @@ export default {
   props: {
     qty: {
       type: Number,
+      required: true,
+      default: 1,
     },
     available: {
       type: Number,
+      required: true,
     },
     id: {
       type: Number,
+      required: true,
     }
   },
   setup(props) {
-    const { updateCartItem, removeItem } = useCartStore()
+    const { updateCartItemQty } = useCartStore()
 
     const alert = ref(false)
-
     const updateValue = (e) => {
+
       if (e.target.value.length) {
-        if (e.target.value < 1) removeItem(props.id)
+        if (e.target.value < 1) {
+          e.target.value = 0
+        }
 
         if (e.target.value > props.available) {
           showAlert()
@@ -49,7 +56,7 @@ export default {
         e.target.value = 1
       }
 
-      updateCartItem(props.id, Number(e.target.value))
+      updateCartItemQty(props.id, Number(e.target.value))
     }
 
     const showAlert = () => alert.value = true
@@ -59,7 +66,7 @@ export default {
       updateValue,
       alert,
       showAlert,
-      hideAlert
+      hideAlert,
     }
   }
 }
