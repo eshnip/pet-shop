@@ -1,29 +1,23 @@
 <template>
-  <div id="app" >
+  <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <CatalogPage />
-    <CartPage />
-
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
 </template>
 
-<script>
-import CatalogPage from './components/Catalog/CatalogPage.vue'
-import CartPage from '@/components/Cart/CartPage.vue'
+<script lang="ts">
+import Vue from 'vue';
+import HelloWorld from './components/HelloWorld.vue';
 
-export default {
+export default Vue.extend({
   name: 'App',
   components: {
-    CatalogPage,
-    CartPage,
-  },
-  setup() {
-
+    HelloWorld
   }
-}
+});
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
