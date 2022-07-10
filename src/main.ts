@@ -13,5 +13,5 @@ const pinia = createPinia()
 new Vue({
   pinia,
   render: (h) => h(App)
-}).$mount("#app");
+}).$mount('#app')
 

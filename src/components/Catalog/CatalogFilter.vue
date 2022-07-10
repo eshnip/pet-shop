@@ -1,10 +1,11 @@
 <template>
   <div class="catalog-filter">
-    <button v-for="btn in filterBtns"
-            :key="btn.name"
-            class="catalog-filter__btn"
-            :class="{'catalog-filter__btn--is-active' : isActiveBtn === btn.name}"
-            @click="toggleActiveBtn(btn.name)"
+    <button
+      v-for="btn in filterBtns"
+      :key="btn.name"
+      class="catalog-filter__btn"
+      :class="{'catalog-filter__btn--is-active' : isActiveBtn === btn.name}"
+      @click="toggleActiveBtn(btn.name)"
     >
       {{ btn.label }}
     </button>
@@ -12,12 +13,12 @@
 </template>
 
 <script>
-import {ref} from '@vue/composition-api';
-import {catalogFilterBtns} from "@/constants/catalogFilterBtns";
+import {ref} from '@vue/composition-api'
+import {catalogFilterBtns} from '@/constants/catalogFilterBtns'
 import {useCatalogStore} from '@/stores/catalog'
 
 export default {
-  name: "CatalogFilter",
+  name: 'CatalogFilter',
   emits: ['filterProducts'],
   setup(_, {emit}) {
 
@@ -29,7 +30,6 @@ export default {
       isActiveBtn.value = name
       emit('filter-products', name)
     }
-
 
     return {
       catalog,

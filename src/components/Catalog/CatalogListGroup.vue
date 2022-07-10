@@ -3,15 +3,23 @@
     <div class="catalog-list-group__header">
       <span class="catalog-list-group__title">{{ group.name }}</span>
     </div>
-    <ul class="catalog-list-group__items" v-if="productsInGroupLength">
+    <ul
+      v-if="productsInGroupLength"
+      class="catalog-list-group__items"
+    >
       <CatalogListItem
-          v-for="product in group.products"
-          :key="product.id"
-          :product="product"
-          class="catalog-list-group__item"
+        v-for="product in group.products"
+        :key="product.id"
+        :product="product"
+        class="catalog-list-group__item"
       />
     </ul>
-    <div class="catalog-list-group__empty" v-else>Нет товаров в наличие</div>
+    <div
+      v-else
+      class="catalog-list-group__empty"
+    >
+      Нет товаров в наличие
+    </div>
   </div>
 </template>
 
@@ -25,7 +33,7 @@ export default {
   props: {
     group: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     }
   },
   setup(props) {

@@ -1,7 +1,7 @@
 import {ref} from '@vue/composition-api'
 
 export const useAlert = () => {
-  const alertIsActive = ref(false);
+  const alertIsActive = ref(false)
 
   const showAlert = () => {
     alertIsActive.value = true

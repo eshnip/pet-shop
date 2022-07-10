@@ -1,5 +1,7 @@
-import {defineStore} from 'pinia';
+import {defineStore} from 'pinia'
 import {mapGroupsWithProducts} from '@/mappers/mapGroupsWithProducts'
+import {IGroup} from '@/types/IGroup'
+import {IProduct} from '@/types/IProduct'
 
 export const useCatalogStore = defineStore({
   id: 'catalog',
@@ -9,20 +11,20 @@ export const useCatalogStore = defineStore({
   }),
   getters: {
     availableProducts(state) {
-      return state.catalog.map(group => ({
-        ...group,
+      return state.catalog.map(group  => ({
+        ...(group as IGroup),
         products: group.products.filter(({qty}) => qty > 0)
       }))
     },
     catalogSortedPriceToDown(state) {
       return state.catalog.map(group => ({
-        ...group,
+        ...(group as IGroup),
         products: [...group.products].sort((a,b) => b.price - a.price)
       }))
     },
     catalogSortedPriceToUp(state) {
         return state.catalog.map(group => ({
-          ...group,
+          ...(group as IGroup),
           products: [...group.products].sort((a,b) => a.price - b.price)
       }))
     },
@@ -48,4 +50,4 @@ export const useCatalogStore = defineStore({
       this.catalog = mapGroupsWithProducts(products)
     },
   }
-});
+})

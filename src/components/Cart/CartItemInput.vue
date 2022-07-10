@@ -10,15 +10,18 @@
         @click="modalIsOpen = true"
       > шт.
     </label>
-    <span class="cart-item-input__tooltip" v-if="alert">Количество ограничено</span>
+    <span
+      v-if="alert"
+      class="cart-item-input__tooltip"
+    >Количество ограничено</span>
   </div>
 </template>
 
 <script>
 import {ref} from '@vue/composition-api'
-import {useCartStore} from "@/stores/cart";
+import {useCartStore} from '@/stores/cart'
 
-export default {
+export default { 
   name: 'CartItemInput',
   props: {
     qty: {

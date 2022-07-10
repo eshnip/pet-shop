@@ -1,7 +1,9 @@
-import groups from '/public/names.json'
-import {priceToFixed} from "@/helpers/priceToFixed";
+import * as groups from '../../public/names.json'
+import {priceToFixed} from '@/helpers/priceToFixed'
+import {IProduct} from '@/types/IProduct'
+import {IGroup} from '@/types/IGroup'
 
-export const mapGroupsWithProducts = (goods) => {
+export const mapGroupsWithProducts = (goods: IProduct[]) => {
   return Object.entries(groups).map(([groupId, products]) => {
     const productsInGroup = Object.entries(products.B)
 
@@ -23,5 +25,5 @@ export const mapGroupsWithProducts = (goods) => {
       name: products.G,
       products: filteredProducts,
     }
-  });
+  })
 }

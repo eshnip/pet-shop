@@ -1,1 +1,2 @@
-export const priceToFixed = data => Number(Number(data).toFixed(2))
+export const priceToFixed = (data: number | string): number => Number(Number(data).toFixed(2))
+

@@ -5,56 +5,62 @@
         <input
           v-model.number="rate"
           type="number"
-          @keypress.prevent
           :min="minRate"
           :max="maxRate"
+          @keypress.prevent
         >
         Курс $
       </div>
 
       <div class="catalog__controls">
-        <CatalogFilter @filter-products="setProductsByFilterValue"/>
-        <CatalogSort @sort-products="setProductsBySortValue"/>
+        <CatalogFilter @filter-products="setProductsByFilterValue" />
+        <CatalogSort @sort-products="setProductsBySortValue" />
       </div>
 
       <div class="catalog__list">
         <CatalogListGroup
           v-for="group in productsList"
-          :group="group"
           :key="group.id"
+          :group="group"
         />
       </div>
     </template>
 
-    <div class="catalog__preloader" v-else></div>
+    <div
+      v-else
+      class="catalog__preloader"
+    />
 
-    <Alert v-if="alertIsActive" :class="{'alert--is-active': alertIsActive}" label="Данные обновлены"/>
-
+    <Alert
+      v-if="alertIsActive"
+      :class="{'alert--is-active': alertIsActive}"
+      label="Данные обновлены"
+    />
   </div>
 </template>
 
 <script>
 import {onMounted, onBeforeUnmount, computed, ref} from '@vue/composition-api'
-import CatalogListGroup from "@/components/Catalog/CatalogListGroup";
-import CatalogFilter from "@/components/Catalog/CatalogFilter";
-import CatalogSort from "@/components/Catalog/CatalogSort";
+import CatalogListGroup from '@/components/Catalog/CatalogListGroup'
+import CatalogFilter from '@/components/Catalog/CatalogFilter'
+import CatalogSort from '@/components/Catalog/CatalogSort'
 import {useAlert} from '@/components/Alert/composables/useAlert'
 import Alert from '@/components/Alert/Alert'
-import {useCatalogStore} from "@/stores/catalog";
+import {useCatalogStore} from '@/stores/catalog'
 import {storeToRefs} from 'pinia'
 import {minRate, maxRate} from '@/constants/rate'
 import {getRandom} from '@/helpers/getRandom'
 import {delay} from '@/helpers/delay'
-import {priceToUp} from "@/constants/catalogSortBtns";
-import {onlyAvailableProducts} from "@/constants/catalogFilterBtns";
+import {priceToUp} from '@/constants/catalogSortBtns'
+import {onlyAvailableProducts} from '@/constants/catalogFilterBtns'
 
 
 export default {
-  name: "CatalogPage",
+  name: 'CatalogPage',
   components: {CatalogListGroup, CatalogFilter, CatalogSort, Alert},
 
   setup() {
-    const catalog = useCatalogStore();
+    const catalog = useCatalogStore()
 
     const {catalog: allProducts, rate, availableProducts, catalogSortedPriceToDown, catalogSortedPriceToUp} = storeToRefs(catalog)
     const {saveProductsToState, fetchProductsData} = catalog
@@ -64,7 +70,7 @@ export default {
 
     delay(1000).then(saveProductsToState).then(() => productsList.value = allProducts.value)
 
-    let updateDataInterval = null;
+    let updateDataInterval = null
 
     onMounted(() => {
       updateDataInterval = setInterval(() => {
@@ -94,7 +100,7 @@ export default {
       setProductsByFilterValue,
       setProductsBySortValue,
       productsList
-    };
+    }
   },
 }
 </script>
