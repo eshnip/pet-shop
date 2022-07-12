@@ -1,13 +1,30 @@
-import * as groups from '../../public/names.json'
+import groups from '../../public/names.json'
 import {priceToFixed} from '@/helpers/priceToFixed'
 import {IProduct} from '@/types/IProduct'
 import {IGroup} from '@/types/IGroup'
 
-export const mapGroupsWithProducts = (goods: IProduct[]) => {
-  return Object.entries(groups).map(([groupId, products]) => {
-    const productsInGroup = Object.entries(products.B)
+type GroupsData = {
+  [key:string] : object,
+}
 
-    const filteredProducts = productsInGroup.map(([productId, productData]) => {
+interface IGroupData {
+  G? : string,
+  C?: string | number,
+  B? : any, // TODO
+}
+
+export const mapGroupsWithProducts = (goods: IProduct[]) => {
+  const groupsData: GroupsData = groups
+  const filteredGroups: IGroup[] = []
+
+  for (const i in groupsData) {
+    const groupValues: IGroupData = groupsData[i]
+    const groupProducts: [string, object][] = Object.entries(groupValues.B)
+
+    const group: IGroup = {
+      id: Number(i),
+      name: groupValues.G,
+      products: groupProducts.map(([productId, productData]) => {
         const targetProduct = goods.find(({id}) => id === Number(productId))
 
         return {
@@ -17,13 +34,11 @@ export const mapGroupsWithProducts = (goods: IProduct[]) => {
           qty: targetProduct ? targetProduct.qty : 0,
           addedQty: 1,
         }
-      }
-    )
-
-    return {
-      id: groupId,
-      name: products.G,
-      products: filteredProducts,
+      })
     }
-  })
+
+    filteredGroups.push(group)
+  }
+
+  return filteredGroups
 }

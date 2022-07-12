@@ -1,7 +1,7 @@
 import {IProduct} from '@/types/IProduct'
 
 export interface IGroup {
-  id: number | string,
-  name: string,
+  id: number,
+  name: string | undefined,
   products: IProduct[],
 }
