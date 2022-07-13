@@ -3,18 +3,18 @@ import {priceToFixed} from '@/helpers/priceToFixed'
 import {IProduct} from '@/types/IProduct'
 import {IGroup} from '@/types/IGroup'
 
-type GroupsData = {
+interface IGroupsData {
   [key:string] : object,
 }
 
 interface IGroupData {
   G? : string,
   C?: string | number,
-  B? : any, // TODO
+  B? : any // TODO
 }
 
 export const mapGroupsWithProducts = (goods: IProduct[]) => {
-  const groupsData: GroupsData = groups
+  const groupsData: IGroupsData = groups
   const filteredGroups: IGroup[] = []
 
   for (const i in groupsData) {
