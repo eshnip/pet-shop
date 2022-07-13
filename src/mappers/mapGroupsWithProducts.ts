@@ -3,14 +3,18 @@ import {priceToFixed} from '@/helpers/priceToFixed'
 import {IProduct} from '@/types/IProduct'
 import {IGroup} from '@/types/IGroup'
 
-interface IGroupsData {
-  [key:string] : object,
+type GroupProducts = {
+  [key:string]: Record<string, string | number>
 }
 
 interface IGroupData {
-  G? : string,
+  G?: string,
   C?: string | number,
-  B? : any // TODO
+  B?: GroupProducts,
+}
+
+interface IGroupsData {
+  [key:string] : IGroupData,
 }
 
 export const mapGroupsWithProducts = (goods: IProduct[]) => {
@@ -18,8 +22,8 @@ export const mapGroupsWithProducts = (goods: IProduct[]) => {
   const filteredGroups: IGroup[] = []
 
   for (const i in groupsData) {
-    const groupValues: IGroupData = groupsData[i]
-    const groupProducts: [string, object][] = Object.entries(groupValues.B)
+    const groupValues = groupsData[i]
+    const groupProducts = Object.entries(groupValues?.B || {})
 
     const group: IGroup = {
       id: Number(i),
@@ -29,7 +33,7 @@ export const mapGroupsWithProducts = (goods: IProduct[]) => {
 
         return {
           id: Number(productId),
-          title: productData.N,
+          title: productData.N.toString(),
           price: targetProduct ? priceToFixed(targetProduct.price) : 0,
           qty: targetProduct ? targetProduct.qty : 0,
           addedQty: 1,
