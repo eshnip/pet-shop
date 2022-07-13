@@ -1,24 +1,30 @@
 import {defineStore} from 'pinia'
 import {mapGroupsWithProducts} from '@/mappers/mapGroupsWithProducts'
 import {IGroup} from '@/types/IGroup'
-import {IProduct} from '@/types/IProduct'
+
+interface IGood {
+  T: string | number, // id
+  C: string | number, // price
+  G: string | number, // groupID
+  P: string | number, // qty
+}
 
 export const useCatalogStore = defineStore({
   id: 'catalog',
   state: () => ({
-    catalog: [],
+    catalog: [] as IGroup[],
     rate: 60,
   }),
   getters: {
     availableProducts(state) {
       return state.catalog.map(group  => ({
-        ...(group as IGroup),
+        ...group,
         products: group.products.filter(({qty}) => qty > 0)
       }))
     },
     catalogSortedPriceToDown(state) {
       return state.catalog.map(group => ({
-        ...(group as IGroup),
+        ...group,
         products: [...group.products].sort((a,b) => b.price - a.price)
       }))
     },
@@ -34,7 +40,7 @@ export const useCatalogStore = defineStore({
       try {
         const response = await fetch('data.json')
         const data = await response.json()
-        return data.Value.Goods.map((product) => ({
+        return data.Value.Goods.map((product: IGood) => ({
           id: Number(product.T),
           price: product.C,
           groupId: product.G,

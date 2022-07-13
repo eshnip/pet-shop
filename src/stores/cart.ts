@@ -3,29 +3,29 @@ import { useCatalogStore } from '@/stores/catalog'
 import {priceToFixed} from '@/helpers/priceToFixed'
 import {IProduct} from '@/types/IProduct'
 
-export type CartState = {
+type CartState = {
   cart: IProduct[];
 };
 
 export const useCartStore = defineStore({
   id: 'cart',
   state: () => ({
-    cart: [],
+    cart: [] ,
   } as CartState),
 
   getters: {
     getCartItemsCount(state) {
-      return state.cart.reduce((acc, cur) => acc + cur.addedQty, 0)
+      return state.cart.reduce((acc, cur) => acc + cur.addedQty!, 0)
     },
 
     getCartTotalValue(state) {
       const {rate} = useCatalogStore()
 
-      return priceToFixed(state.cart.reduce((acc, cur) => acc + (cur.price * rate * cur.addedQty), 0))
+      return priceToFixed(state.cart.reduce((acc, cur) => acc + (cur.price * rate * cur.addedQty!), 0))
     },
 
     totalQty(state) {
-      return state.cart.reduce((acc, cur) => acc + cur.addedQty, 0)
+      return state.cart.reduce((acc, cur) => acc + cur.addedQty!, 0)
     }
   },
   actions: {
@@ -42,7 +42,7 @@ export const useCartStore = defineStore({
         return
       }
 
-      productInCart.addedQty += productInCart.addedQty < product.qty ? 1 : product.qty
+      productInCart.addedQty! += productInCart.addedQty! < product.qty ? 1 : product.qty
     },
 
     updateCartItemQty(payloadId: number, newQty: number) {

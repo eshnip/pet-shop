@@ -3,14 +3,14 @@ import {priceToFixed} from '@/helpers/priceToFixed'
 import {IProduct} from '@/types/IProduct'
 import {IGroup} from '@/types/IGroup'
 
-type GroupProducts = {
+interface GroupProducts {
   [key:string]: Record<string, string | number>
 }
 
 interface IGroupData {
-  G?: string,
+  G: string,
   C?: string | number,
-  B?: GroupProducts,
+  B: GroupProducts,
 }
 
 interface IGroupsData {
