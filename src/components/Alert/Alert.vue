@@ -8,9 +8,9 @@
 </template>
 
 <script lang="ts">
-import { computed } from '@vue/composition-api'
+import {computed, defineComponent} from '@vue/composition-api'
 
-export default {
+export default defineComponent({
   name: 'AppAlert',
   props: {
     theme: {
@@ -29,7 +29,7 @@ export default {
       alertClasses
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

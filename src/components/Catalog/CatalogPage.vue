@@ -58,19 +58,18 @@ import {onlyAvailableProducts} from '@/constants/catalogFilterBtns'
 export default defineComponent({
   name: 'CatalogPage',
   components: {CatalogListGroup, CatalogFilter, CatalogSort, Alert},
-
   setup() {
     const catalog = useCatalogStore()
 
     const {catalog: allProducts, rate, availableProducts, catalogSortedPriceToDown, catalogSortedPriceToUp} = storeToRefs(catalog)
     const {saveProductsToState, fetchProductsData} = catalog
     const {showAlert, alertIsActive} = useAlert()
-    const productsList = ref([])
+    const productsList = ref()
     const sort = ref()
 
     delay(1000).then(saveProductsToState).then(() => productsList.value = allProducts.value)
 
-    let updateDataInterval = null
+    let updateDataInterval: number
 
     onMounted(() => {
       updateDataInterval = setInterval(() => {
@@ -84,9 +83,9 @@ export default defineComponent({
 
     const productsLength = computed(() => allProducts.value?.length)
 
-    const setProductsByFilterValue = type => productsList.value = type === onlyAvailableProducts ? availableProducts.value : allProducts.value
+    const setProductsByFilterValue = (type: string) => productsList.value = type === onlyAvailableProducts ? availableProducts.value : allProducts.value
 
-    const setProductsBySortValue = sortBy => {
+    const setProductsBySortValue = (sortBy: string) => {
       sort.value = sortBy
       productsList.value = sort.value === priceToUp ? catalogSortedPriceToUp.value : catalogSortedPriceToDown.value
     }

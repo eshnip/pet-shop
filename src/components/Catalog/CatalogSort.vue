@@ -21,7 +21,7 @@ export default defineComponent({
   setup(_, {emit}) {
     const isActiveBtn = ref('')
 
-    const toggleActiveBtn = (name) => {
+    const toggleActiveBtn = (name: string) => {
       isActiveBtn.value = name
       emit('sort-products', name)
     }
