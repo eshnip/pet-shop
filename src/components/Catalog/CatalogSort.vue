@@ -12,11 +12,11 @@
   </div>
 </template>
 
-<script>
-import {ref} from '@vue/composition-api'
+<script lang="ts">
+import {defineComponent, ref} from '@vue/composition-api'
 import {catalogSortBtns} from '@/constants/catalogSortBtns'
 
-export default {
+export default defineComponent({
   name: 'CatalogSort',
   setup(_, {emit}) {
     const isActiveBtn = ref('')
@@ -32,7 +32,7 @@ export default {
       sortBtns: catalogSortBtns
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

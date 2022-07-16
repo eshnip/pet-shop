@@ -1,19 +1,32 @@
 <template>
   <div class="cart">
     <div class="cart__wrapper">
-      <div class="cart__title">Корзина</div>
+      <div class="cart__title">
+        Корзина
+      </div>
 
-      <form class="cart__form" @submit.prevent="checkoutCart">
+      <form
+        class="cart__form"
+        @submit.prevent="checkoutCart"
+      >
         <div class="cart__body">
-          <ul class="cart__list" v-if="cartLength">
+          <ul
+            v-if="cartLength"
+            class="cart__list"
+          >
             <CartItem
-                v-for="item in cart"
-                :item="item"
-                :key="item.id"
-                class="cart__item"
+              v-for="item in cart"
+              :key="item.id"
+              :item="item"
+              class="cart__item"
             />
           </ul>
-          <div class="cart__empty" v-else>Пока что здесь пусто</div>
+          <div
+            v-else
+            class="cart__empty"
+          >
+            Пока что здесь пусто
+          </div>
         </div>
 
         <div class="cart__total">
@@ -22,22 +35,34 @@
         </div>
 
         <div class="cart__controls">
-          <button :disabled="!cartLength" class="cart__btn cart__btn--danger" @click="clearCart">Очистить корзину
+          <button
+            :disabled="!cartLength"
+            class="cart__btn cart__btn--danger"
+            @click="clearCart"
+          >
+            Очистить корзину
           </button>
-          <button :disabled="!cartLength" class="cart__btn" type="submit">Оформить заказ</button>
+          <button
+            :disabled="!cartLength"
+            class="cart__btn"
+            type="submit"
+          >
+            Оформить заказ
+          </button>
         </div>
       </form>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {useCartStore} from '@/stores/cart'
 import CartItem from '@/components/Cart/CartItem'
 import {storeToRefs} from 'pinia'
 import {computed} from '@vue/composition-api/dist/vue-composition-api'
+import {defineComponent} from '@vue/composition-api'
 
-export default {
+export default defineComponent({
   name: 'CartPage',
   components: {CartItem},
   setup() {
@@ -62,8 +87,7 @@ export default {
       cartLength
     }
   }
-}
-
+})
 </script>
 
 <style scoped lang="scss">

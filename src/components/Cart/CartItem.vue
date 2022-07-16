@@ -41,20 +41,21 @@
   </div>
 </template>
 
-<script>
-import CartItemInput from '@/components/Cart/CartItemInput'
+<script lang="ts">
 import {useCartStore} from '@/stores/cart'
-import {ref, computed, toRefs} from '@vue/composition-api'
+import {defineComponent, ref, computed, toRefs, watch, PropType} from '@vue/composition-api'
 import {priceToFixed} from '@/helpers/priceToFixed'
 import {useCatalogStore} from '@/stores/catalog'
 import {storeToRefs} from 'pinia'
-import {watch} from '@vue/composition-api/dist/vue-composition-api'
-export default {
+import {IProduct} from '@/types/IProduct'
+import CartItemInput from '@/components/Cart/CartItemInput'
+
+export default defineComponent({
   name: 'CartItem',
   components: {CartItemInput},
   props: {
     item: {
-      type: Object,
+      type: Object as PropType<IProduct>,
       default: () => ({})
     }
   },
@@ -81,7 +82,7 @@ export default {
       priceClass,
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

@@ -1,10 +1,13 @@
 <template>
-  <div class="alert" :class="alertClasses">
-     {{ label }}
+  <div
+    class="alert"
+    :class="alertClasses"
+  >
+    {{ label }}
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { computed } from '@vue/composition-api'
 
 export default {
@@ -20,7 +23,6 @@ export default {
     },
   },
   setup(props) {
-
    const alertClasses = computed(() => `alert--${props.theme}`)
 
     return {

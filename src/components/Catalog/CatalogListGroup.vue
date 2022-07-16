@@ -23,11 +23,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import CatalogListItem from '@/components/Catalog/CatalogListItem'
-import {computed} from '@vue/composition-api'
+import {computed, defineComponent} from '@vue/composition-api'
 
-export default {
+export default defineComponent({
   name: 'CatalogListGroup',
   components: { CatalogListItem },
   props: {
@@ -43,7 +43,7 @@ export default {
       productsInGroupLength
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

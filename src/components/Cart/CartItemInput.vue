@@ -17,11 +17,11 @@
   </div>
 </template>
 
-<script>
-import {ref} from '@vue/composition-api'
+<script lang="ts">
+import {defineComponent, ref} from '@vue/composition-api'
 import {useCartStore} from '@/stores/cart'
 
-export default { 
+export default defineComponent({
   name: 'CartItemInput',
   props: {
     qty: {
@@ -72,7 +72,7 @@ export default {
       hideAlert,
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

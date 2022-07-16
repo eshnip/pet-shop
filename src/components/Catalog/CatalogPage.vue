@@ -39,8 +39,8 @@
   </div>
 </template>
 
-<script>
-import {onMounted, onBeforeUnmount, computed, ref} from '@vue/composition-api'
+<script lang="ts">
+import {onMounted, onBeforeUnmount, computed, ref, defineComponent} from '@vue/composition-api'
 import CatalogListGroup from '@/components/Catalog/CatalogListGroup'
 import CatalogFilter from '@/components/Catalog/CatalogFilter'
 import CatalogSort from '@/components/Catalog/CatalogSort'
@@ -55,7 +55,7 @@ import {priceToUp} from '@/constants/catalogSortBtns'
 import {onlyAvailableProducts} from '@/constants/catalogFilterBtns'
 
 
-export default {
+export default defineComponent({
   name: 'CatalogPage',
   components: {CatalogListGroup, CatalogFilter, CatalogSort, Alert},
 
@@ -102,7 +102,7 @@ export default {
       productsList
     }
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

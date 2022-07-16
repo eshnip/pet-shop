@@ -23,14 +23,14 @@
   </li>
 </template>
 
-<script>
+<script lang="ts">
 import {useCatalogStore} from '@/stores/catalog'
 import {useCartStore} from '@/stores/cart'
-import {ref, watch, computed, toRefs} from '@vue/composition-api'
+import {ref, watch, computed, toRefs, defineComponent} from '@vue/composition-api'
 import {storeToRefs} from 'pinia'
 import {priceToFixed} from '@/helpers/priceToFixed'
 
-export default {
+export default defineComponent({
   name: 'CatalogListItem',
   props: {
     product: {
@@ -60,7 +60,7 @@ export default {
       priceClass
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

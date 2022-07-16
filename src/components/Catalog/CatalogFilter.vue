@@ -12,12 +12,12 @@
   </div>
 </template>
 
-<script>
-import {ref} from '@vue/composition-api'
+<script lang="ts">
+import {defineComponent, ref} from '@vue/composition-api'
 import {catalogFilterBtns} from '@/constants/catalogFilterBtns'
 import {useCatalogStore} from '@/stores/catalog'
 
-export default {
+export default defineComponent({
   name: 'CatalogFilter',
   emits: ['filterProducts'],
   setup(_, {emit}) {
@@ -39,7 +39,7 @@ export default {
       filterBtns
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">
