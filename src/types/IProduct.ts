@@ -3,5 +3,5 @@ export interface IProduct {
   id: number,
   price: number,
   qty: number,
-  addedQty?: number,
+  addedQty: number,
 }
