@@ -26,15 +26,16 @@
 <script lang="ts">
 import {useCatalogStore} from '@/stores/catalog'
 import {useCartStore} from '@/stores/cart'
-import {ref, watch, computed, toRefs, defineComponent} from '@vue/composition-api'
+import {ref, watch, computed, toRefs, defineComponent, PropType} from '@vue/composition-api'
 import {storeToRefs} from 'pinia'
 import {priceToFixed} from '@/helpers/priceToFixed'
+import {IProduct} from '@/types/IProduct'
 
 export default defineComponent({
   name: 'CatalogListItem',
   props: {
     product: {
-      type: Object,
+      type: Object as PropType<IProduct>,
       default: () => ({})
     },
   },

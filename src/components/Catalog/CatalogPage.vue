@@ -31,7 +31,7 @@
       class="catalog__preloader"
     />
 
-    <Alert
+    <AppAlert
       v-if="alertIsActive"
       :class="{'alert--is-active': alertIsActive}"
       label="Данные обновлены"
@@ -45,7 +45,7 @@ import CatalogListGroup from '@/components/Catalog/CatalogListGroup'
 import CatalogFilter from '@/components/Catalog/CatalogFilter'
 import CatalogSort from '@/components/Catalog/CatalogSort'
 import {useAlert} from '@/components/Alert/composables/useAlert'
-import Alert from '@/components/Alert/Alert'
+import AppAlert from '@/components/Alert/Alert'
 import {useCatalogStore} from '@/stores/catalog'
 import {storeToRefs} from 'pinia'
 import {minRate, maxRate} from '@/constants/rate'
@@ -54,10 +54,9 @@ import {delay} from '@/helpers/delay'
 import {priceToUp} from '@/constants/catalogSortBtns'
 import {onlyAvailableProducts} from '@/constants/catalogFilterBtns'
 
-
 export default defineComponent({
   name: 'CatalogPage',
-  components: {CatalogListGroup, CatalogFilter, CatalogSort, Alert},
+  components: {CatalogListGroup, CatalogFilter, CatalogSort, AppAlert},
   setup() {
     const catalog = useCatalogStore()
 
