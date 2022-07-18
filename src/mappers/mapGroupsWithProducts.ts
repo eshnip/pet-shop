@@ -1,4 +1,4 @@
-import groups from '../../public/names.json'
+import groups from '@/../public/names.json'
 import {priceToFixed} from '@/helpers/priceToFixed'
 import {IProduct} from '@/types/IProduct'
 import {IGroup} from '@/types/IGroup'

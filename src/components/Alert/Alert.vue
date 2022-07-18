@@ -8,13 +8,14 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from '@vue/composition-api'
+import {computed, defineComponent, PropType} from '@vue/composition-api'
+import {AlertTheme} from '@/types/alerts'
 
 export default defineComponent({
   name: 'AppAlert',
   props: {
     theme: {
-      type: String,
+      type: String as PropType<AlertTheme>,
       default: 'primary'
     },
     label: {

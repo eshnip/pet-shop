@@ -2,12 +2,11 @@
   <div class="cart-item-input">
     <label>
       <input
+        v-model.number="quantity"
         class="cart-item-input__qty"
         type="number"
-        :value="qty"
         @input="updateValue"
         @blur="hideAlert"
-        @click="modalIsOpen = true"
       > шт.
     </label>
     <span
@@ -18,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from '@vue/composition-api'
+import {defineComponent, ref, watch} from '@vue/composition-api'
 import {useCartStore} from '@/stores/cart'
 
 export default defineComponent({
@@ -39,28 +38,26 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const alert = ref(false)
+    const quantity = ref(1)
     const { updateCartItemQty } = useCartStore()
 
-    const alert = ref(false)
-    const updateValue = (e) => {
-
-      if (e.target.value.length) {
-        if (e.target.value < 1) {
-          e.target.value = 0
-        }
-
-        if (e.target.value > props.available) {
-          showAlert()
-          e.target.value = props.available
-        } else {
-          hideAlert()
-        }
-      } else {
-        e.target.value = 1
+    const updateValue = (event: Event & {target: HTMLInputElement}) => {
+      if (Number(event.target.value) < 1) {
+        quantity.value = 0
+        return
       }
 
-      updateCartItemQty(props.id, Number(e.target.value))
+      if (Number(event.target.value) > props.available) {
+        showAlert()
+        quantity.value = props.available
+        return
+      }
+
+      updateCartItemQty(props.id, quantity.value)
     }
+
+    watch(() => props.qty, () => quantity.value =  props.qty)
 
     const showAlert = () => alert.value = true
     const hideAlert = () => alert.value = false
@@ -70,6 +67,7 @@ export default defineComponent({
       alert,
       showAlert,
       hideAlert,
+      quantity
     }
   }
 })

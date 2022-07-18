@@ -24,15 +24,16 @@
 </template>
 
 <script lang="ts">
-import CatalogListItem from '@/components/Catalog/CatalogListItem'
-import {computed, defineComponent} from '@vue/composition-api'
+import CatalogListItem from '@/components/Catalog/CatalogListItem.vue'
+import {computed, defineComponent, PropType} from '@vue/composition-api'
+import {IGroup} from '@/types/IGroup'
 
 export default defineComponent({
   name: 'CatalogListGroup',
   components: { CatalogListItem },
   props: {
     group: {
-      type: Object,
+      type: Object as PropType<IGroup>,
       default: () => ({})
     }
   },

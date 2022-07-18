@@ -40,13 +40,11 @@ export default defineComponent({
     },
   },
   setup(props) {
-
-    const catalog = useCatalogStore()
-    const {addItemToCart} = useCartStore()
-    const {rate} = storeToRefs(catalog)
+    const priceClass = ref('')
     const {product} = toRefs(props)
-
-    const priceClass = ref()
+    const catalog = useCatalogStore()
+    const {rate} = storeToRefs(catalog)
+    const {addItemToCart} = useCartStore()
 
     watch(() => rate.value, (newV, oldV) => {
       priceClass.value = (newV > oldV ? 'catalog-list-item__price--up' : 'catalog-list-item__price--down')

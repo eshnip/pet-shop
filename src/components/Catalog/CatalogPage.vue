@@ -41,39 +41,39 @@
 
 <script lang="ts">
 import {onMounted, onBeforeUnmount, computed, ref, defineComponent} from '@vue/composition-api'
-import CatalogListGroup from '@/components/Catalog/CatalogListGroup'
-import CatalogFilter from '@/components/Catalog/CatalogFilter'
-import CatalogSort from '@/components/Catalog/CatalogSort'
+import CatalogListGroup from '@/components/Catalog/CatalogListGroup.vue'
+import CatalogFilter from '@/components/Catalog/CatalogFilter.vue'
+import CatalogSort from '@/components/Catalog/CatalogSort.vue'
 import {useAlert} from '@/components/Alert/composables/useAlert'
-import AppAlert from '@/components/Alert/Alert'
+import AppAlert from '@/components/Alert/Alert.vue'
 import {useCatalogStore} from '@/stores/catalog'
 import {storeToRefs} from 'pinia'
 import {minRate, maxRate} from '@/constants/rate'
 import {getRandom} from '@/helpers/getRandom'
 import {delay} from '@/helpers/delay'
 import {priceToUp} from '@/constants/catalogSortBtns'
+import {SortValues} from '@/types/sort'
 import {onlyAvailableProducts} from '@/constants/catalogFilterBtns'
+import {IGroup} from '@/types/IGroup'
+import {FilterValues} from '@/types/filter'
 
 export default defineComponent({
   name: 'CatalogPage',
   components: {CatalogListGroup, CatalogFilter, CatalogSort, AppAlert},
   setup() {
     const catalog = useCatalogStore()
-
+    const productsList = ref<IGroup[] | null>(null)
     const {catalog: allProducts, rate, availableProducts, catalogSortedPriceToDown, catalogSortedPriceToUp} = storeToRefs(catalog)
-    const {saveProductsToState, fetchProductsData} = catalog
+    const {saveProductsToState} = catalog
     const {showAlert, alertIsActive} = useAlert()
-    const productsList = ref()
-    const sort = ref()
+    let updateDataInterval: number
 
     delay(1000).then(saveProductsToState).then(() => productsList.value = allProducts.value)
-
-    let updateDataInterval: number
 
     onMounted(() => {
       updateDataInterval = setInterval(() => {
         rate.value = getRandom(minRate, maxRate)
-        fetchProductsData()
+        saveProductsToState()
         showAlert()
       }, 5000)
     })
@@ -82,12 +82,9 @@ export default defineComponent({
 
     const productsLength = computed(() => allProducts.value?.length)
 
-    const setProductsByFilterValue = (type: string) => productsList.value = type === onlyAvailableProducts ? availableProducts.value : allProducts.value
+    const setProductsByFilterValue = (type: FilterValues) => productsList.value = type === onlyAvailableProducts ? availableProducts.value : allProducts.value
 
-    const setProductsBySortValue = (sortBy: string) => {
-      sort.value = sortBy
-      productsList.value = sort.value === priceToUp ? catalogSortedPriceToUp.value : catalogSortedPriceToDown.value
-    }
+    const setProductsBySortValue = (sortBy: SortValues) => productsList.value = sortBy === priceToUp ? catalogSortedPriceToUp.value : catalogSortedPriceToDown.value
 
     return {
       productsLength,

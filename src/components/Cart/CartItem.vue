@@ -48,7 +48,7 @@ import {priceToFixed} from '@/helpers/priceToFixed'
 import {useCatalogStore} from '@/stores/catalog'
 import {storeToRefs} from 'pinia'
 import {IProduct} from '@/types/IProduct'
-import CartItemInput from '@/components/Cart/CartItemInput'
+import CartItemInput from '@/components/Cart/CartItemInput.vue'
 
 export default defineComponent({
   name: 'CartItem',
@@ -64,9 +64,9 @@ export default defineComponent({
     const {item} = toRefs(props)
     const {rate} = storeToRefs(useCatalogStore())
     const qty = ref(1)
+    const priceClass = ref('')
     const price = computed(() => priceToFixed(item.value.price * rate.value))
     const totalPriceValue = computed(() => priceToFixed(price.value * item.value.addedQty))
-    const priceClass = ref()
 
     watch(() => rate.value, (newV, oldV) => {
       priceClass.value = (newV > oldV ? 'cart-item__price--up' : 'cart-item__price--down')

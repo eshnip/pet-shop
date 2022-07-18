@@ -3,16 +3,21 @@ import {mapGroupsWithProducts} from '@/mappers/mapGroupsWithProducts'
 import {IGroup} from '@/types/IGroup'
 
 interface IGood {
-  T: string | number, // id
-  C: string | number, // price
-  G: string | number, // groupID
-  P: string | number, // qty
+  T: number, // id
+  C: number, // price
+  G: number, // groupID
+  P: number, // qty
+}
+
+interface State {
+  catalog: IGroup[]
+  rate: number
 }
 
 export const useCatalogStore = defineStore({
   id: 'catalog',
-  state: () => ({
-    catalog: [] as IGroup[],
+  state: (): State => ({
+    catalog: [],
     rate: 60,
   }),
   getters: {

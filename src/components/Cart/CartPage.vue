@@ -4,7 +4,6 @@
       <div class="cart__title">
         Корзина
       </div>
-
       <form
         class="cart__form"
         @submit.prevent="checkoutCart"
@@ -57,7 +56,7 @@
 
 <script lang="ts">
 import {useCartStore} from '@/stores/cart'
-import CartItem from '@/components/Cart/CartItem'
+import CartItem from '@/components/Cart/CartItem.vue'
 import {storeToRefs} from 'pinia'
 import {computed} from '@vue/composition-api/dist/vue-composition-api'
 import {defineComponent} from '@vue/composition-api'

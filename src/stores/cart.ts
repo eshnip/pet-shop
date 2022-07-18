@@ -9,9 +9,9 @@ type CartState = {
 
 export const useCartStore = defineStore({
   id: 'cart',
-  state: () => ({
-    cart: [] ,
-  } as CartState),
+  state: (): CartState => ({
+    cart: []
+  }),
 
   getters: {
     getCartItemsCount(state) {
@@ -46,13 +46,15 @@ export const useCartStore = defineStore({
       cartProduct.addedQty += cartProduct.addedQty < product.qty ? 1 : product.qty
     },
 
-    updateCartItemQty(payloadId: number, newQty: number) {
+    updateCartItemQty(payloadId: IProduct['id'], newQty: number) {
       const cartProduct =  this.cart.find(el => el.id === payloadId)
 
-      if (cartProduct) cartProduct.addedQty = newQty
+      if (cartProduct) {
+        cartProduct.addedQty = newQty
+      }
     },
 
-    removeItem(payloadId: number) {
+    removeItem(payloadId: IProduct['id']) {
       const targetProduct = this.cart.find(el => el.id === payloadId)
       const idx = this.cart.findIndex(el => el.id === payloadId)
 
