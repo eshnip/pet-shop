@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import {computed, defineComponent, PropType} from '@vue/composition-api'
-import {AlertTheme} from '@/types/alerts'
+import {AlertTheme} from '@/types/Alerts'
 
 export default defineComponent({
   name: 'AppAlert',

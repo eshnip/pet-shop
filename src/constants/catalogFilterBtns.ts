@@ -1,12 +1,12 @@
-export const onlyAvailableProducts = 'available'
+import {FilterValues} from '@/types/FilterValues'
 
 export const catalogFilterBtns = [
   {
-    name: 'all',
+    name: FilterValues.All,
     label: 'Все товары',
   },
   {
-    name: onlyAvailableProducts,
+    name: FilterValues.Available,
     label: 'Товары в наличие',
   }
 ]

@@ -15,7 +15,7 @@
 <script lang="ts">
 import {defineComponent, ref} from '@vue/composition-api'
 import {useCatalogStore} from '@/stores/catalog'
-import {FilterValues} from '@/types/filter'
+import {FilterValues} from '@/types/FilterValues'
 import {catalogFilterBtns} from '@/constants/catalogFilterBtns'
 
 export default defineComponent({

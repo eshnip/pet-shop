@@ -1,13 +1,12 @@
-export const priceToDown = 'priceToDown'
-export const priceToUp = 'priceToUp'
+import {SortValues} from '@/types/SortValues'
 
 export const catalogSortBtns = [
-    {
-        name: priceToDown,
-        label: 'По убыванию цены',
-    },
-    {
-        name: priceToUp,
-        label: 'По возрастанию цены',
-    },
+  {
+    name: SortValues.PriceToDown,
+    label: 'По убыванию цены',
+  },
+  {
+    name: SortValues.PriceToUp,
+    label: 'По возрастанию цены',
+  },
 ]

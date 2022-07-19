@@ -29,7 +29,7 @@ export const useCatalogStore = defineStore({
     },
     catalogSortedPriceToDown(state) {
       return state.catalog.map(group => ({
-        ...group,
+        ...(group as IGroup),
         products: [...group.products].sort((a,b) => b.price - a.price)
       }))
     },
