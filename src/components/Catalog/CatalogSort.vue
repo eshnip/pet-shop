@@ -1,11 +1,11 @@
 <template>
   <div class="catalog-sort">
     <button
-      v-for="btn in sortBtns"
-      :key="btn.name"
+      v-for="btn in catalogSortBtns"
+      :key="btn.id"
       class="catalog-sort__btn"
-      :class="{'catalog-sort__btn--is-active' : isActiveBtn === btn.name}"
-      @click="toggleActiveBtn(btn.name)"
+      :class="{'catalog-sort__btn--is-active' : isActiveBtn === btn.id}"
+      @click="toggleActiveBtn(btn.id)"
     >
       {{ btn.label }}
     </button>
@@ -21,15 +21,15 @@ export default defineComponent({
   setup(_, {emit}) {
     const isActiveBtn = ref('')
 
-    const toggleActiveBtn = (name: string) => {
-      isActiveBtn.value = name
-      emit('sort-products', name)
+    const toggleActiveBtn = (id: string) => {
+      isActiveBtn.value = id
+      emit('sort-products', id)
     }
 
     return {
       toggleActiveBtn,
       isActiveBtn,
-      sortBtns: catalogSortBtns
+      catalogSortBtns
     }
   }
 })

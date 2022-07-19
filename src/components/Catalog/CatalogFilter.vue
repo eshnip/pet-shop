@@ -2,10 +2,10 @@
   <div class="catalog-filter">
     <button
       v-for="btn in catalogFilterBtns"
-      :key="btn.name"
+      :key="btn.id"
       class="catalog-filter__btn"
-      :class="{'catalog-filter__btn--is-active' : isActiveBtn === btn.name}"
-      @click="toggleActiveBtn(btn.name)"
+      :class="{'catalog-filter__btn--is-active' : isActiveBtn === btn.id}"
+      @click="toggleActiveBtn(btn.id)"
     >
       {{ btn.label }}
     </button>
@@ -26,9 +26,9 @@ export default defineComponent({
     const {catalog, availableProducts} = useCatalogStore()
     const isActiveBtn = ref('')
 
-    const toggleActiveBtn = (name: FilterValues) => {
-      isActiveBtn.value = name
-      emit('filter-products', name)
+    const toggleActiveBtn = (id: FilterValues) => {
+      isActiveBtn.value = id
+      emit('filter-products', id)
     }
 
     return {

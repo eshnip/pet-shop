@@ -49,11 +49,8 @@ import {minRate, maxRate} from '@/constants/rate'
 import {useAlert} from '@/components/Alert/composables/useAlert'
 import {useCatalogStore} from '@/stores/catalog'
 import {storeToRefs} from 'pinia'
-import {getRandom} from '@/helpers/getRandom'
-import {delay} from '@/helpers/delay'
-import {IGroup} from '@/types/IGroup'
-import {SortValues} from '@/types/SortValues'
-import {FilterValues} from '@/types/FilterValues'
+import {getRandom, delay} from '@/helpers'
+import {SortValues, FilterValues, IGroup} from '@/types'
 
 export default defineComponent({
   name: 'CatalogPage',
@@ -64,7 +61,7 @@ export default defineComponent({
     const {catalog: allProducts, rate, availableProducts, catalogSortedPriceToDown, catalogSortedPriceToUp} = storeToRefs(catalog)
     const {saveProductsToState} = catalog
     const {showAlert, alertIsActive} = useAlert()
-    let updateDataInterval: number
+    let updateDataInterval = 0
 
     delay(1000).then(saveProductsToState).then(() => productsList.value = allProducts.value)
 

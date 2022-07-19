@@ -2,11 +2,11 @@ import {SortValues} from '@/types/SortValues'
 
 export const catalogSortBtns = [
   {
-    name: SortValues.PriceToDown,
+    id: SortValues.PriceToDown,
     label: 'По убыванию цены',
   },
   {
-    name: SortValues.PriceToUp,
+    id: SortValues.PriceToUp,
     label: 'По возрастанию цены',
   },
 ]

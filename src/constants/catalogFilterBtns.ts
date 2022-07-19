@@ -2,11 +2,11 @@ import {FilterValues} from '@/types/FilterValues'
 
 export const catalogFilterBtns = [
   {
-    name: FilterValues.All,
+    id: FilterValues.All,
     label: 'Все товары',
   },
   {
-    name: FilterValues.Available,
+    id: FilterValues.Available,
     label: 'Товары в наличие',
   }
 ]
